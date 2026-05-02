@@ -289,7 +289,7 @@ def view_message(m_id):
 
 
 #게시판 메시지 수정하기, 비밀글이면 비밀번호 맞아야 수정가능
-@app.route('/messages/<int:m_id>', methods = ['PUT'])
+@app.route('/messages/<int:m_id>/update', methods = ['POST'])
 def update_message(m_id):
     title = request.form.get('title')
     content = request.form.get('content')
@@ -306,12 +306,13 @@ def update_message(m_id):
             if message is None:
                 return jsonify({"result":"fail", "message":"존재하지 않는 게시글입니다"})
             
-            if not check_password_hash(message['m_pw'], pw):
-                return jsonify({"result":"fail", "message":"비밀번호가 일치하지 않습니다"})
-            
-            sql = "UPDATE messages SET title=%s, content=%s WHERE m_id=%s"
-            cursor.execute(sql, (title, content, m_id))
-
+            if message['m_pw']:
+                if not pw or not check_password_hash(message['m_pw'], pw):
+                    return jsonify({"result":"fail", "message":"비밀번호가 일치하지 않아요"})
+            cursor.execute(
+                "UPDATE messages SET title=%s, content=%s WHERE m_id=%s",(title, content, m_id)
+            )
+    
         conn.commit()
         return jsonify({"result":"success", "message":"수정 완료"})
 
