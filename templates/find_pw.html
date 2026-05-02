@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 비밀번호 찾기</title>
+    <style>
+        body { 
+          font-family:"Dongle", sans-serif; 
+          font-size:3rem;
+          background-color: #0b0e14; 
+          color: #e0e0e0; 
+          display: flex; 
+          justify-content: center; 
+          align-items: center; 
+          height: 100vh; 
+          margin: 0; }
+        .find-box { 
+          background: #161b22; 
+          padding: 40px; 
+          border-radius: 12px; 
+          border: 1px solid #00ffcc; 
+          width: 350px; }
+        h2 { 
+          color: #00ffcc; 
+          text-align: center; }
+        input { 
+          width: 100%; 
+          padding: 12px; 
+          margin-bottom: 15px; 
+          border-radius: 6px; 
+          border: 1px solid #30363d; 
+          background: #0d1117; 
+          color: white; 
+          box-sizing: border-box; }
+        button { 
+          font-family: "Dongle", sans-serif;
+          font-size: 2rem;
+          width: 100%; 
+          padding: 12px; 
+          background-color: #00ffcc; 
+          color: #0b0e14; 
+          border: none; 
+          border-radius: 6px; 
+          font-weight: bold; 
+          cursor: pointer; }
+        .error { 
+          color: #ff7b72; 
+          text-align: center; 
+          margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="find-box">
+        <h2>비밀번호 찾기</h2>
+        <p style="text-align: center; font-size: 1.5rem; color: #8b949e;">비밀번호를 재설정할 아이디를 입력하세요.</p>
+
+        {% if error %}
+            <p class="error">⚠️ {{ error }}</p>
+        {% endif %}
+
+        <form action="/find-pw" method="POST">
+            <input type="text" name="user_id" placeholder="요원 아이디(ID)" required>
+            <button type="submit">계정 확인</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="/" style="color: #8b949e; text-decoration: none; font-size: 1.5rem;">취소하고 돌아가기</a>
+        </p>
+    </div>
+</body>
+</html>
