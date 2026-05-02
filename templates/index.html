@@ -1,1 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신</title>
+    <style>
+        
+        body { 
+          font-family: "Dongle", sans-serif; 
+          background-color: #0b0e14; 
+          color: #e0e0e0; margin: 0; 
+          padding: 20px; }
+        .container { 
+          max-width: 1000px;
+          margin: auto; }
+        
+        header { 
+          font-size:1.5rem;
+          text-align: center; 
+          padding: 40px 0; 
+          border-bottom: 1px solid #1f2937; }
+        h1 { 
+          color: #00ffcc; 
+          font-size: 6rem; 
+          text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); 
+          margin: 0; 
+          cursor: pointer; }
+        
+        .main-layout { 
+          display: grid; 
+          grid-template-columns: 300px 1fr; 
+          gap: 30px; 
+          margin-top: 30px; }
 
+        
+        .login-section { 
+          background: #161b22; 
+          padding: 20px; 
+          border-radius: 12px; 
+          height: fit-content; 
+          border: 1px solid #30363d; }
+        .login-section h2 { 
+          font-size: 3rem; 
+          margin-top: 0; 
+          color: #00ffcc; }
+        
+        
+        .alert-success { 
+          background: rgba(0, 255, 204, 0.1); 
+          color: #00ffcc; padding: 10px; 
+          border-radius: 6px; font-size: 0.85rem; 
+          margin-bottom: 15px; 
+          border: 1px solid #00ffcc; 
+          text-align: center; }
+
+        input { 
+          width: 100%; 
+          padding: 12px; 
+          margin-bottom: 10px; 
+          border-radius: 6px; 
+          border: 1px solid #30363d; 
+          background: #0d1117; 
+          color: white; 
+          box-sizing: border-box; }
+        button { 
+          font-family: "Dongle", sans-serif;
+          font-size: 1.5rem;
+          width: 100%; 
+          padding: 12px;
+          border: none; 
+          border-radius: 6px; 
+          cursor: pointer; 
+          font-weight: 400; 
+          transition: 0.3s; 
+          margin-bottom: 8px; }
+        
+        .btn-login { 
+          background-color: #00ffcc; 
+          color: #0b0e14; }
+        .btn-login:hover { 
+          background-color: #00d4aa; }
+        
+        .btn-register { 
+          font-family: "Dongle", sans-serif;
+          background-color: transparent; 
+          color: #00ffcc; 
+          border: 1px solid #00ffcc; }
+        .btn-register:hover { 
+          font-family: "Dongle", sans-serif;
+          background-color: rgba(0, 255, 204, 0.1); }
+        
+        .btn-mypage { 
+          background-color: #30363d; 
+          color: white; }
+        .btn-mypage:hover { 
+          background-color: #444c56; }
+
+        .btn-logout { 
+          background-color: #da3633; 
+          color: white; }
+        .btn-logout:hover { 
+          background-color: #f85149; }
+
+        .find-links { 
+          margin-top: 15px; 
+          font-size: 1.5rem; 
+          text-align: center; 
+          border-top: 1px solid #30363d; 
+          padding-top: 15px; }
+        .find-links a { 
+          color: #8b949e; 
+          text-decoration: none; 
+          margin: 0 5px; }
+        .find-links a:hover { 
+          color: #00ffcc; 
+          text-decoration: underline; }
+
+        
+        .content-section { 
+          background: #161b22; 
+          padding: 25px; 
+          border-radius: 12px; 
+          border: 1px solid #30363d; }
+        .board-header { 
+          font-size:1.5rem;
+          display: flex; 
+          justify-content: space-between; 
+          align-items: center; 
+          margin-bottom: 20px; }
+        .btn-write { 
+          background-color: #30363d; 
+          color: white; width: auto; 
+          padding: 8px 16px; 
+          font-size: 1.5rem; 
+          margin: 0; }
+        
+        .msg-table { 
+          width: 100%; 
+          border-collapse: collapse; }
+        .msg-table th { 
+          font-size:1.3rem;
+          text-align: left; 
+          padding: 12px; 
+          border-bottom: 2px solid #30363d; 
+          color: #8b949e; }
+        .msg-table td {
+          padding: 15px 12px; 
+          border-bottom: 1px solid #21262d; }
+        .msg-table tr:hover { 
+          background-color: #1c2128; }
+        .title-link { 
+          color: #58a6ff; 
+          text-decoration: none; 
+          cursor: pointer; }
+        .title-link:hover { 
+          text-decoration: underline; }
+        
+        .secret-tag { 
+          font-size: 1.2rem; 
+          background: #382324; 
+          color: #ff7b72; 
+          padding: 2px 6px; 
+          border-radius: 4px; 
+          margin-right: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 onclick="location.href='/'">🛸외계통신</h1>
+        <p>☆ ˚₊✩‧₊💌외계인들과 랜덤 메시지를 즐겨보아요~⋰˚☆ ˚₊✩‧</p>
+    </header>
+
+    <div class="main-layout">
+        <aside class="login-section">
+            {% if success %}
+                <div class="alert-success">{{ success }}</div>
+            {% endif %}
+
+            {% if not session.get('user_id') %}
+                <h2>메신저 접속 하기</h2>
+                <form action="/login" method="POST">
+                    <input type="text" name="user_id" placeholder="ID" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="btn-login">접속하기</button>
+                </form>
+                
+                <button type="button" class="btn-register" onclick="location.href='/register_page'">회원가입</button>
+
+                <div class="find-links">
+                    <a href="/find-id">아이디 찾기</a> | 
+                    <a href="/find-pw">비밀번호 찾기</a>
+                </div>
+            {% else %}
+                <h2>통신 중...</h2>
+                <p>🛰️ <strong>{{ session['user_id'] }}</strong>회원님</p>
+                
+                <button type="button" class="btn-mypage" onclick="location.href='/user/{{ session.user_id }}'">
+                    마이페이지
+                </button>
+                
+                <form action="/logout" method="POST">
+                    <button type="submit" class="btn-logout">연결 끊기 (로그아웃)</button>
+                </form>
+            {% endif %}
+        </aside>
+
+        <main class="content-section">
+            <div class="board-header">
+                <h2>최근 메시지 기록</h2>
+                <button class="btn-write" onclick="location.href='/write'">메시지 전송</button>
+            </div>
+
+            <table class="msg-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">번호</th>
+                        <th style="width: 60%;">제목</th>
+                        <th style="width: 30%;">발신인</th>
+                    </tr>
+                </thead>
+                <tbody id="message-list-body">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #8b949e;">데이터를 수신 중입니다...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</div>
+
+<script>
+    // 게시글 목록 가져오기
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/messages')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('message-list-body');
+                tbody.innerHTML = ''; 
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; font-size:1.3rem;">도착한 메시지가 없습니다.</td></tr>';
+                    return;
+                }
+
+                data.forEach(msg => {
+                    const tr = document.createElement('tr');
+                    const secretTag = msg.m_pw ? '<span class="secret-tag">비밀</span>' : '';
+                    
+                    tr.innerHTML = `
+                        <td>${msg.m_id}</td>
+                        <td>
+                            ${secretTag}
+                            <a class="title-link" onclick="viewDetail(${msg.m_id})">${msg.title}</a>
+                        </td>
+                        <td><a href="/users/${msg.user_id}" style="color:#8b949e; text-decoration:none;">${msg.user_id}</a></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(err => {
+                console.error('로드 실패:', err);
+                document.getElementById('message-list-body').innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">통신 장애가 발생했습니다.</td></tr>';
+            });
+    });
+
+    function viewDetail(id) {
+      location.href = '/messages/' + id;
+        
+        
+    }
+</script>
+
+</body>
+</html>
