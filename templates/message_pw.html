@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 비밀 메시지</title>
+    <style>
+        body { 
+            background-color: #0b0e14; 
+            color: #e0e0e0; 
+            font-family: "Dongle", sans-serif;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; }
+        .box { 
+            background: #161b22; 
+            padding: 40px; 
+            border-radius: 12px;
+            border: 1px solid #ff7b72; 
+            width: 350px; 
+            text-align: center; }
+        h2 { 
+            color: #ff7b72;
+            font-size:3rem;
+         }
+        p { 
+            color: #8b949e; 
+            font-size: 1.5rem; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border-radius: 6px;
+            border: 1px solid #30363d; 
+            background: #0d1117; 
+            color: white; 
+            box-sizing: border-box; }
+        button { 
+            width: 100%;
+            font-family:"Dongle", sans-serif;
+            font-size:2rem;
+            padding: 12px; 
+            background-color: #ff7b72; 
+            color: #0b0e14;
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; }
+        .error { 
+            color: #ff7b72; 
+            font-size: 1.5rem; 
+            margin-bottom: 10px; }
+        a { 
+            color: #8b949e; 
+            font-size: 1.5rem; 
+            display: block; 
+            margin-top: 15px; 
+            text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>🔒 비밀 메시지</h2>
+        <p>이 메시지는 비밀번호로 보호되어 있습니다</p>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/messages/{{ m_id }}" method="POST">
+            <input type="password" name="password" placeholder="비밀번호 입력" required>
+            <button type="submit">확인</button>
+        </form>
+        <a href="/">← 돌아가기</a>
+    </div>
+</body>
+</html>
