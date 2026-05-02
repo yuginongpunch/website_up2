@@ -17,10 +17,10 @@ def init_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
-            user_id VARCHAR(10) PRIMARY KEY,
+            user_id VARCHAR(50) PRIMARY KEY,
             password VARCHAR(256) NOT NULL,
-            nickname VARCHAR(10) NOT NULL,
-            school VARCHAR(20),
+            nickname VARCHAR(50) NOT NULL,
+            school VARCHAR(100),
             bio VARCHAR(255),
             profile_img VARCHAR(255)
         )
@@ -30,7 +30,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS messages (
             m_id INT AUTO_INCREMENT PRIMARY KEY,
             m_pw VARCHAR(256),
-            user_id VARCHAR(10) NOT NULL,
+            user_id VARCHAR(50) NOT NULL,
             title VARCHAR(100) NOT NULL,
             content TEXT NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
