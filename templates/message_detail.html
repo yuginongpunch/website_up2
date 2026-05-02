@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>{{ message.title }}</title>
+    <style>
+        body { 
+            background-color: #0b0e14; 
+            color: #e0e0e0; 
+            font-family: "Dongle", sans-serif;
+            display: flex; 
+            justify-content: center; 
+            padding: 40px; }
+        .box { 
+            background: #161b22; 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid #00ffcc; 
+            width: 600px; }
+        h2 { 
+            color: #00ffcc;
+            font-size:3rem;
+         }
+        .meta { 
+            color: #8b949e; 
+            font-size: 2rem; 
+            margin-bottom: 20px; }
+        .content { 
+            background: #0d1117; 
+            padding: 20px; 
+            border-radius: 8px; 
+            line-height: 1.8; }
+        a { 
+            color: #00ffcc;
+            font-size:1.5rem;
+            text-decoration: none; 
+            display: inline-block;
+            margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>{{ message.title }}</h2>
+        <div class="meta">
+            작성자: {{ message.user_id }} · {{ message.created_at }}
+        </div>
+        <div class="content">{{ message.content }}</div>
+        {% if message.file_name %}
+            <a href="/messages/{{ message.m_id }}/download">📎 첨부파일 다운로드</a>
+        {% endif %}
+        <a href="/">← 목록으로</a>
+    </div>
+</body>
+</html>
