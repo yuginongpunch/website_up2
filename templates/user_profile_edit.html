@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 정보 수정</title>
+    <style>
+        body { 
+            font-family:"Dongle", sans-serif;
+            background-color: #0b0e14; 
+            color: #e0e0e0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; }
+        .edit-box { 
+            background: #161b22; 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid #00ffcc; 
+            width: 380px; }
+        h2 { 
+            color: #00ffcc;
+            font-size:3rem; 
+            text-align: center; }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            color: #8b949e; 
+            font-size: 1.5rem; }
+        input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #0d1117; 
+            color: white; 
+            box-sizing: border-box; }
+        textarea { 
+            height: 80px; 
+            resize: none; }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #00ffcc; 
+            color: #0b0e14; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold;
+            font-family: "Dongle", sans-serif;
+            font-size:2rem;
+            cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="edit-box">
+        <h2>정보 수정</h2>
+        <form action="/users/{{ session['user_id'] }}/update" method="POST" enctype="multipart/form-data">
+            
+            <label>닉네임</label>
+            <input type="text" name="nickname" value="{{ user.nickname }}" required>
+
+            <label>학교</label>
+            <input type="text" name="school" value="{{ user.school }}">
+
+            <label>자기소개</label>
+            <textarea name="bio">{{ user.bio }}</textarea>
+
+            <label>프로필 이미지 변경</label>
+            <input type="file" name="profile_img" accept="image/*">
+
+            <button type="submit">변경 내용 저장</button>
+        </form>
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="/user/{{ session['user_id'] }}" style="color: #8b949e; text-decoration: none; font-size: 1.5rem;">취소하기</a>
+        </p>
+    </div>
+</body>
+</html>
