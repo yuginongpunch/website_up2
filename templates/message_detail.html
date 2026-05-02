@@ -16,7 +16,8 @@
             padding: 40px; }
         .box { 
             background: #161b22; 
-            padding: 30px; 
+            padding: 30px;
+            font-size:1.5rem; 
             border-radius: 12px; 
             border: 1px solid #00ffcc; 
             width: 600px; }
@@ -39,19 +40,140 @@
             text-decoration: none; 
             display: inline-block;
             margin-top: 20px; }
+
+        
+        .btn-group { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 20px; }
+        .btn { 
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            border: none; cursor: pointer; 
+            font-weight: bold; 
+            font-family: "Dongle", sans-serif; 
+            font-size: 2rem; }
+        .btn-edit { 
+            background: #00ffcc;
+            font-size:2rem; 
+            color: #0b0e14; }
+        .btn-delete { 
+            background: #da3633;
+            font-size:2rem; 
+            color: white; }
+        .btn-back { 
+            background: transparent;
+            font-size:2rem; 
+            color: #00ffcc; 
+            border: 1px solid #00ffcc; 
+            padding: 10px 20px; 
+            border-radius: 6px; }
+        .edit-form { 
+            display: none; 
+            margin-top: 20px; 
+            background: #0d1117; 
+            padding: 20px; 
+            border-radius: 8px; }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #0d1117; 
+            color: white;
+            box-sizing: border-box; }
+        textarea { 
+            width: 100%;
+            padding: 10px; 
+            height: 120px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #161b22; 
+            color: white; 
+            box-sizing: border-box; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>{{ message.title }}</h2>
-        <div class="meta">
-            작성자: {{ message.user_id }} · {{ message.created_at }}
+        <h2 id="msg-title">{{ message.title }}</h2>
+        <div class="content" id="msg-content">
+            작성자: <a href="/users/{{ message.user_id }}">{{ message.user_id }}</a>
         </div>
         <div class="content">{{ message.content }}</div>
         {% if message.file_name %}
             <a href="/messages/{{ message.m_id }}/download">📎 첨부파일 다운로드</a>
         {% endif %}
-        <a href="/">← 목록으로</a>
+
+        <div class="btn-group">
+            <a href="/" class="btn-back">← 목록으로</a>
+            <button class="btn btn-edit" onclick="toggleEdit()">수정하기</button>
+            <button class="btn btn-delete" onclick="deleteMessage()">삭제하기</button>
+        </div>
+
+        <div class="edit-form" id="edit-form" style="display:none;">
+            {% if message.m_pw %}
+                <input type="password" id="edit-pw" placeholder="비밀번호 입력">
+            {% endif %}
+            <input type="text" id="edit-title" value="{{ message.title }}">
+            <textarea id="edit-content">{{ message.content }}</textarea>
+            <button class="btn btn-edit" onclick="submitEdit()">수정 완료</button>
+        </div>
     </div>
+
+    <script>
+        const m_id = {{ message.m_id }};
+        const hasPw = {{ 'true' if message.m_pw else 'false' }};
+
+    
+        function toggleEdit() {
+            const form = document.getElementById('edit-form');
+            const isHidden = window.getComputedStyle(form).display === 'none';
+            form.style.display = isHidden ? 'block' : 'none';
+}
+
+    // 수정 요청
+        function submitEdit() {
+            const title = document.getElementById('edit-title').value;
+            const content = document.getElementById('edit-content').value;
+            const pw = hasPw ? document.getElementById('edit-pw').value : '';
+
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('content', content);
+            formData.append('password', pw);
+
+            fetch(`/messages/${m_id}/update`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    document.getElementById('msg-title').innerText = title;
+                    document.getElementById('msg-content').innerText = content;
+                    document.getElementById('edit-form').style.display = 'none';
+                    alert('수정 완료!');
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+
+    // 삭제 요청
+        function deleteMessage() {
+            if (!confirm('정말 삭제할까요?')) return;
+
+            fetch(`/messages/${m_id}`, { method: 'DELETE' })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('삭제 완료!');
+                    location.href = '/';
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>
