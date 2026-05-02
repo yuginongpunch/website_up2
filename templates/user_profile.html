@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 마이페이지</title>
+    <style>
+        body { 
+            font-family:"Dongle", sans-serif;  
+            background-color: #0b0e14; 
+            color: #e0e0e0; display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; }
+        .profile-card { 
+            background: #161b22; 
+            padding: 40px; 
+            border-radius: 15px; 
+            border: 1px solid #00ffcc; 
+            width: 400px; 
+            text-align: center; }
+        .profile-img { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 3px solid #00ffcc; 
+            object-fit: cover; 
+            margin-bottom: 20px; 
+            background: #0d1117; }
+        h2 { 
+            color: #00ffcc;
+            font-size:3rem; 
+            margin-bottom: 5px; }
+        .user-id { 
+            color: #8b949e; 
+            font-size: 1.5rem; 
+            margin-bottom: 20px; }
+        .info-group { 
+            text-align: left; 
+            background: #0d1117; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; }
+        .info-label { 
+            color: #00ffcc; 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 5px; }
+        .info-value { 
+            font-size: 1.5rem;
+            margin-bottom: 15px; 
+            display: block; 
+            border-bottom: 1px solid #30363d; 
+            padding-bottom: 5px; }
+        .btn-edit { 
+            display: block; 
+            width: 100%; 
+            padding: 12px; 
+            background: #00ffcc; 
+            color: #0b0e14; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold;
+            font-size:2rem; 
+            margin-bottom: 10px;
+            box-sizing: border-box;
+         }
+        .btn-home { 
+            display: block; 
+            width: 100%; 
+            padding: 12px; 
+            background: transparent; 
+            color: #00ffcc; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            border: 1px solid #00ffcc; 
+            font-weight: bold;
+            font-size:2rem; 
+            box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <img src="{{ url_for('static', filename='profiles/' + (user.profile_img if user.profile_img else 'default.png')) }}" class="profile-img" alt="프로필">
+        <h2>{{ user.nickname }}</h2>
+        <div class="user-id">회원 코드: {{ user.user_id }}</div>
+
+        <div class="info-group">
+            <span class="info-label">소속 학교</span>
+            <span class="info-value">{{ user.school if user.school else '미지정' }}</span>
+            
+            <span class="info-label">자기소개</span>
+            <span class="info-value">{{ user.bio if user.bio else '등록된 소개가 없습니다.' }}</span>
+        </div>
+
+        <a href="/users/{{ user.user_id }}/edit" class="btn-edit">정보 수정하기</a>
+        <a href="/" class="btn-home">메인으로</a>
+    </div>
+</body>
+</html>
