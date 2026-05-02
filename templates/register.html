@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 회원가입</title>
+    <style>
+        body { 
+            font-family: "Dongle", sans-serif;
+            background-color: #0b0e14; 
+            color: #e0e0e0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; }
+        .register-box { 
+            background: #161b22; 
+            padding: 40px; 
+            border-radius: 12px; 
+            border: 1px solid #00ffcc; 
+            width: 350px; }
+        h2 { 
+            color: #00ffcc;
+            font-size:3rem; 
+            text-align: center; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #0d1117; 
+            color: white; 
+            box-sizing: border-box; }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #00ffcc; 
+            color: #0b0e14; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold;
+            font-size:2rem;
+            font-family: "Dongle", sans-serif;
+            cursor: pointer; }
+        .error { 
+            color: #ff7b72; 
+            font-size: 0.9em; 
+            text-align: center;
+            margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="register-box">
+        <h2>회원가입</h2>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/register" method="POST">
+            <input type="text" name="id" placeholder="아이디(ID)" required>
+            <input type="password" name="password" placeholder="비밀번호(password)" required>
+            <input type="text" name="nickname" placeholder="닉네임(nickname)" required>
+            <input type="text" name="school" placeholder="학교(school)" required>
+            <button type="submit">완료</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="/" style="color: #8b949e; text-decoration: none; font-size: 1.5rem;">이미 요원입니다 (홈으로)</a>
+        </p>
+    </div>
+</body>
+</html>
