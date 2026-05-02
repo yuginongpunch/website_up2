@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>외계통신 - 메시지 전송</title>
+    <style>
+        body { 
+            font-family: "Dongle", sans-serif;
+            background-color: #0b0e14; 
+            color: #e0e0e0; display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; }
+        .message-box { 
+            background: #161b22; 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 1px solid #00ffcc; 
+            width: 500px; 
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.1); }
+        h2 { 
+            font-size: 5rem;
+            color: #00ffcc; 
+            text-align: center; 
+            margin-top: 0; }
+        label { 
+            font-family: "Dongle", sans-serif;
+            
+            display: block; 
+            margin-bottom: 8px; 
+            color: #8b949e; 
+            font-size: 2rem; }
+        
+        input[type="text"], 
+        input[type="password"], 
+        textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border-radius: 8px; 
+            border: 1px solid #30363d; 
+            background: #0d1117; 
+            color: white; 
+            box-sizing: border-box; 
+        }
+        
+        textarea { 
+            height: 150px; 
+            resize: vertical; }
+        
+        /* 파일 업로드 스타일 */
+        input[type="file"] { 
+            margin-bottom: 20px; 
+            color: #8b949e; }
+        
+        .btn-group { 
+            display: flex; 
+            gap: 10px; }
+        button { 
+            font-family: "Dongle", sans-serif;
+            font-size:2rem;
+            flex: 2; 
+            padding: 12px; 
+            background-color: #00ffcc; 
+            color: #0b0e14; border: none; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: 0.3s; }
+        button:hover { 
+            background-color: #00ccaa; 
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3); }
+        .btn-cancel { 
+            
+            flex: 1; 
+            background-color: transparent; 
+            color: #ff7b72; 
+            border: 1px solid #ff7b72; 
+            text-decoration: none; 
+            padding: 12px;
+            text-align: center; 
+            line-height: 40px; 
+            border-radius: 8px; 
+            font-size: 2rem; }
+        
+        .secret-info { 
+            font-size: 1.5rem; 
+            color: #8b949e; 
+            margin-top: -15px; 
+            margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h2>👾메시지 전송..</h2>
+        <form action="/messages" method="POST" enctype="multipart/form-data">
+            
+            <label for="title">메시지 제목</label>
+            <input type="text" id="title" name="title" placeholder="통신 제목을 입력하세요" required>
+
+            <label for="content">내용</label>
+            <textarea id="content" name="content" placeholder="전송할 내용을 적어주세요 (외계어 환영)" required></textarea>
+
+            <label for="m_pw">비밀번호 (선택)</label>
+            <input type="password" id="m_pw" name="m_pw" placeholder="비밀글로 설정하려면 입력하세요">
+            <p class="secret-info">* 비밀번호 설정 시 본인과 비밀번호를 아는 회원만 볼 수 있습니다.</p>
+
+            <label for="file">파일 첨부 하기</label>
+            <input type="file" id="file" name="file">
+
+            <div class="btn-group">
+                <a href="/" class="btn-cancel">취소</a>
+                <button type="submit">메시지 전송!</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
